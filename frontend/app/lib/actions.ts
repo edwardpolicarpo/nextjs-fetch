@@ -1,6 +1,8 @@
 "use server";
 
 import { z } from "zod";
+import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation';
 import { api } from "./api";
 
 const employeeSchema = z.object({
@@ -32,6 +34,9 @@ export async function createEmployee(formData: FormData) {
     console.error("API Error:", error);
     throw new Error("Failed to Create Employee");
   }
+
+  revalidatePath('/');
+  redirect('/');
 }
 
 export async function updatePutEmployee(id: string, formData: FormData) {
@@ -44,6 +49,9 @@ export async function updatePutEmployee(id: string, formData: FormData) {
     console.error("API Error:", error);
     throw new Error("Failed to Update Employee");
   }
+
+  revalidatePath('/');
+  redirect('/');
 }
 
 export async function updatePatchEmployee(id: string, formData: FormData) {
@@ -56,6 +64,9 @@ export async function updatePatchEmployee(id: string, formData: FormData) {
     console.error("API Error:", error);
     throw new Error("Failed to Update Employee");
   }
+
+  revalidatePath('/');
+  redirect('/');
 }
 
 export async function deleteEmployee(id: string) {
@@ -65,4 +76,6 @@ export async function deleteEmployee(id: string) {
     console.error("API Error:", error);
     throw new Error("Failed to Delete Employee");
   }
+
+  revalidatePath('/');
 }

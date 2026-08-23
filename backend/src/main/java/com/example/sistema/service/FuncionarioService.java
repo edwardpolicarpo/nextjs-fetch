@@ -19,13 +19,23 @@ public class FuncionarioService {
 
   private final FuncionarioRepository repository;
 
-    public List<Funcionario> findAll() {
-        return repository.findAll();
+    public List<Funcionario> findAll(
+            String query,
+            Number offset,
+            Number limit
+    ) {
+        return repository.findAll(
+                query, offset, limit
+        );
     }
 
     public Funcionario findById(Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "funcionario not found"));
+    }
+
+    public Number count(String query) {
+        return repository.count(query);
     }
 
     public Funcionario create(FuncionarioDTO dto) {

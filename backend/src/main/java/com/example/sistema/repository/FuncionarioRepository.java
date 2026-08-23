@@ -28,8 +28,58 @@ public class FuncionarioRepository {
         return Optional.ofNullable(database.get(id));
     }
 
-    public List<Funcionario> findAll() {
-        return new ArrayList<>(database.values());
+    public List<Funcionario> findAll(
+            String query,
+            Number offset,
+            Number limit
+    ) {
+        int safeOffset = offset != null ? Math.max(0, offset.intValue()) : 0;
+        int safeLimit = limit != null ? Math.max(1, limit.intValue()) : 10;
+
+        String search = query == null
+                ? ""
+                : query.trim().toLowerCase();
+
+        return database.values()
+                .stream()
+                .filter(funcionario -> matchesQuery(funcionario, search))
+                .skip(safeOffset)
+                .limit(safeLimit)
+                .toList();
+    }
+
+    public Number count(String query) {
+        String search = query == null
+                ? ""
+                : query.trim().toLowerCase();
+
+        return database.values()
+                .stream()
+                .filter(funcionario -> matchesQuery(funcionario, search))
+                .toArray().length;
+    }
+
+    private boolean matchesQuery(Funcionario funcionario, String query) {
+        if (query.isBlank()) {
+            return true;
+        }
+
+        return contains(funcionario.getId(), query)
+                || contains(funcionario.getNome(), query)
+                || contains(funcionario.getEmail(), query)
+                || contains(funcionario.getTelefone(), query)
+                || contains(funcionario.getCargo(), query)
+                || contains(funcionario.getDepartamento(), query)
+                || contains(funcionario.getSalario(), query)
+                || contains(funcionario.getCidade(), query)
+                || contains(funcionario.getStatus(), query);
+    }
+
+    private boolean contains(Object value, String query) {
+        return value != null
+                && value.toString()
+                .toLowerCase()
+                .contains(query);
     }
 
     public void deleteById(Long id) {

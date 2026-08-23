@@ -1,18 +1,6 @@
 import { Employee } from './definitions';
 import { api } from './api';
 
-export async function fetchEmployeesPages(
-  query: string,
-) {
-  try {
-    const response = await api.get<number>(`/funcionarios/count?search=${query}`);
-    return response.data;
-  } catch (error) {
-    console.error('API Error:', error);
-    throw new Error('Failed to fetch employees');
-  }
-}
-
 const ITEMS_PER_PAGE = 6;
 export async function fetchFilteredEmployees(
   query: string,
@@ -22,6 +10,20 @@ export async function fetchFilteredEmployees(
   try {
     const response = await api.get<Employee[]>(`/funcionarios?search=${query}&offset=${offset}&limit=${ITEMS_PER_PAGE}`);
     return response.data;
+  } catch (error) {
+    console.error('API Error:', error);
+    throw new Error('Failed to fetch employees');
+  }
+}
+
+export async function fetchEmployeesPages(
+  query: string,
+) {
+  try {
+    const response = await api.get<number>(`/funcionarios/count?search=${query}`);
+
+    const totalPages = Math.ceil(response.data / ITEMS_PER_PAGE);
+    return totalPages;
   } catch (error) {
     console.error('API Error:', error);
     throw new Error('Failed to fetch employees');

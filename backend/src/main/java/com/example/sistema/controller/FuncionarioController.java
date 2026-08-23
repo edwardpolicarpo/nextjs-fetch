@@ -23,13 +23,26 @@ public class FuncionarioController {
   private final FuncionarioService service;
 
     @GetMapping
-    public ResponseEntity<List<Funcionario>> getAll() {
-        return ResponseEntity.ok(service.findAll());
+    public ResponseEntity<List<Funcionario>> getAll(
+            @RequestParam(required = false) String search,
+            @RequestParam(required = false) Number offset,
+            @RequestParam(required = false) Number limit
+    ) {
+        return ResponseEntity.ok(service.findAll(
+                search,
+                offset,
+                limit
+        ));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Funcionario> getById(@PathVariable Long id) {
         return ResponseEntity.ok(service.findById(id));
+    }
+
+    @GetMapping("/count")
+    public Number count(@RequestParam(required = false) String search) {
+        return service.count(search);
     }
 
     @PostMapping
