@@ -15,9 +15,8 @@ export default async function Page({
   }
 
   return (
-    <main className="flex flex-col min-h-screen items-center p-20">
-      <h1 className="w-full max-w-md text-2xl">Edit Employee</h1>
-      <div className="mt-4 flex w-full justify-center">
+    <main className="flex flex-col min-h-screen bg-background p-4 sm:p-8 lg:p-20">
+      <div className="max-w-2xl mx-auto w-full">
         <EditForm employee={employee} />
       </div>
     </main>

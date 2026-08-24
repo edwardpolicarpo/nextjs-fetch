@@ -9,8 +9,11 @@ const geistMono = Geist_Mono({subsets:['latin'],variable:'--font-mono'});
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={cn("font-mono", geistMono.variable, instrumentSansHeading.variable)}>
-      <body>{children}</body>
+    <html
+      lang="en"
+      className={cn("font-mono dark", geistMono.variable, instrumentSansHeading.variable)}
+    >
+      <body className="bg-background text-foreground">{children}</body>
     </html>
   );
 }

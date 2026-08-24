@@ -18,14 +18,16 @@ export default async function Page(props: {
   const totalPages = await fetchEmployeesPages(query);
 
   return (
-    <main className="flex flex-col min-h-screen items-center p-20">
-      <h1 className="text-2xl text-left w-full">Employees</h1>
-      <aside className="my-4 flex items-center justify-between gap-2 md:my-8 w-full">
+    <main className="flex flex-col min-h-screen items-center p-4 sm:p-8 lg:p-20">
+      <h1 className="text-2xl sm:text-3xl text-left w-full font-semibold">Employees</h1>
+      <aside className="my-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2 md:my-8 w-full">
         <Search placeholder="Search employees..." />
         <CreateEmployeeDialog />
       </aside>
       <Suspense key={query + currentPage} fallback={<TableSkeleton />}>
-        <Table query={query} currentPage={currentPage} />
+        <div className="w-full overflow-x-auto">
+          <Table query={query} currentPage={currentPage} />
+        </div>
         <Pagination totalPages={totalPages} />
       </Suspense>
     </main>
