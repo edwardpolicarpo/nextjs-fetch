@@ -16,26 +16,26 @@ export default function EmployeeStatus({ status }: { status: string }) {
     >
       {status === 'em analise' ? (
         <>
+          <IconClock className="ml-1 w-4 text-gray-500" />{' '}
           Pending
-          <IconClock className="ml-1 w-4 text-gray-500" />
         </>
       ) : null}
       {status === 'aprovado' ? (
         <>
+          <IconCheck className="ml-1 w-4 text-white" />{' '}
           Approved
-          <IconCheck className="ml-1 w-4 text-white" />
         </>
       ) : null}
       {status === 'reprovado' ? (
         <>
+          <IconX className="ml-1 w-4 text-white" />{' '}
           Rejected
-          <IconX className="ml-1 w-4 text-white" />
         </>
       ) : null}
       {status === 'contratado' ? (
         <>
+          <IconRosetteDiscountCheck className="ml-1 w-4 text-white" />{' '}
           Contracted
-          <IconRosetteDiscountCheck className="ml-1 w-4 text-white" />
         </>
       ) : null}
     </span>

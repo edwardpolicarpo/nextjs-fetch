@@ -41,13 +41,13 @@ public class FuncionarioService {
     public Funcionario create(FuncionarioDTO dto) {
 
         Funcionario funcionario = Funcionario.builder()
-                .nome(dto.getNome())
+                .name(dto.getName())
                 .email(dto.getEmail())
-                .telefone(dto.getTelefone())
-                .cargo(dto.getCargo())
-                .departamento(dto.getDepartamento())
-                .salario(dto.getSalario())
-                .cidade(dto.getCidade())
+                .phone(dto.getPhone())
+                .role(dto.getRole())
+                .department(dto.getDepartment())
+                .salary(dto.getSalary())
+                .city(dto.getCity())
                 .status(dto.getStatus())
                 .build();
 
@@ -58,13 +58,13 @@ public class FuncionarioService {
         Funcionario funcionario = repository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Funcionario não encontrado"));
 
-        funcionario.setNome(dto.getNome());
+        funcionario.setName(dto.getName());
         funcionario.setEmail(dto.getEmail());
-        funcionario.setTelefone(dto.getTelefone());
-        funcionario.setCargo(dto.getCargo());
-        funcionario.setDepartamento(dto.getDepartamento());
-        funcionario.setSalario(dto.getSalario());
-        funcionario.setCidade(dto.getCidade());
+        funcionario.setPhone(dto.getPhone());
+        funcionario.setRole(dto.getRole());
+        funcionario.setDepartment(dto.getDepartment());
+        funcionario.setSalary(dto.getSalary());
+        funcionario.setCity(dto.getCity());
 
         return repository.save(funcionario);
     }
@@ -74,7 +74,7 @@ public class FuncionarioService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Funcionario não encontrado"));
 
         if (dto.getCargo() != null) {
-            funcionario.setCargo(dto.getCargo());
+            funcionario.setRole(dto.getCargo());
         }
 
         if (dto.getStatus() != null) {
@@ -82,7 +82,7 @@ public class FuncionarioService {
         }
 
         if (dto.getSalario() != null) {
-            funcionario.setSalario(dto.getSalario());
+            funcionario.setSalary(dto.getSalario());
         }
 
         return repository.save(funcionario);

@@ -1,14 +1,37 @@
 import { UpdateButton, DeleteButton } from "@/app/ui/employees/buttons";
 import EmployeeStatus from "@/app/ui/employees/status";
+import { Employee } from "@/app/lib/definitions";
 import { fetchFilteredEmployees } from "@/app/lib/data";
 import { formatCurrency } from "@/app/lib/utils";
+import { Button } from "@/components/ui/button";
 import {
-  IconMapPinFilled,
-  IconPhoneFilled,
-  IconMoodUnamused,
-} from "@tabler/icons-react";
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { IconDots } from "@tabler/icons-react";
 
-export default async function InvoicesTable({
+const employeeKeys: Array<keyof Employee> = [
+  "name",
+  "email",
+  "phone",
+  "role",
+  "department",
+  "city",
+  "salary",
+  "status"
+];
+
+export default async function EmployeeTable({
   query,
   currentPage,
 }: {
@@ -19,89 +42,116 @@ export default async function InvoicesTable({
 
   if (!employees || employees.length === 0) {
     return (
-      <div className="mt-6 flex min-w-full items-center justify-center rounded-lg bg-gray-50 p-4 text-gray-500">
-        <IconMoodUnamused className="w-10 text-gray-500" />
-        <span className="ml-2 text-sm">No employees found.</span>
-      </div>
+      <Table>
+        <TableHeader>
+          <TableRow>
+            {employeeKeys.map((key) => (
+              <TableHead key={key} className="capitalize">
+                {key}
+              </TableHead>
+            ))}
+            <TableHead className="text-right capitalize">actions</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          <TableRow>
+            <TableCell
+              colSpan={employeeKeys.length + 1}
+              className="text-center h-20"
+            >
+              No employees found.
+            </TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
     );
   }
 
   return (
-    <div className="mt-6 flow-root">
-      <div className="inline-block min-w-full align-middle rounded-2xl bg-blue-50">
-        <table className="min-w-full text-gray-900">
-          <thead className="text-left text-sm">
-            <tr>
-              <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
-                Name
-              </th>
-              <th scope="col" className="px-3 py-5 font-medium">
-                Email
-              </th>
-              <th scope="col" className="px-3 py-5 font-medium">
-                Phone
-              </th>
-              <th scope="col" className="px-3 py-5 font-medium">
-                Role
-              </th>
-              <th scope="col" className="px-3 py-5 font-medium">
-                Department
-              </th>
-              <th scope="col" className="px-3 py-5 font-medium">
-                City
-              </th>
-              <th scope="col" className="px-3 py-5 font-medium">
-                Salary
-              </th>
-              <th scope="col" className="px-3 py-5 font-medium">
-                Status
-              </th>
-              <th scope="col" className="relative py-3 pl-6 pr-3">
-                <span className="sr-only">Edit</span>
-              </th>
-            </tr>
-          </thead>
-          <tbody className="bg-white">
-            {employees?.map((employee) => (
-              <tr
-                key={employee.id}
-                className="w-full border-b py-3 text-sm"
-              >
-                <td className="whitespace-nowrap py-3 pl-6 pr-3">
-                  <p>{employee.name}</p>
-                </td>
-                <td className="whitespace-nowrap px-3 py-3">
-                  {employee.email}
-                </td>
-                <td className="whitespace-nowrap px-3 py-3">
-                  <IconPhoneFilled className="h-5 w-5 text-gray-500" />
-                  {employee.phone}
-                </td>
-                <td className="whitespace-nowrap px-3 py-3">{employee.role}</td>
-                <td className="whitespace-nowrap px-3 py-3">
-                  {employee.department}
-                </td>
-                <td className="whitespace-nowrap px-3 py-3">
-                  <IconMapPinFilled className="h-5 w-5 text-gray-500" />
-                  {employee.city}
-                </td>
-                <td className="whitespace-nowrap px-3 py-3">
-                  {formatCurrency(employee.salary)}
-                </td>
-                <td className="whitespace-nowrap px-3 py-3">
-                  <EmployeeStatus status={employee.status} />
-                </td>
-                <td className="whitespace-nowrap py-3 pl-6 pr-3">
-                  <div className="flex justify-end gap-3">
+    <Table>
+      <TableHeader>
+        <TableRow>
+          {employeeKeys.map((key) => (
+            <TableHead key={key} className="capitalize">
+              {key}
+            </TableHead>
+          ))}
+          <TableHead className="text-right capitalize">actions</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {employees.map((employee) => (
+          <TableRow key={employee.id}>
+            <TableCell>{employee.name}</TableCell>
+            <TableCell>{employee.email}</TableCell>
+            <TableCell>{employee.phone}</TableCell>
+            <TableCell>{employee.department}</TableCell>
+            <TableCell>{employee.role}</TableCell>
+            <TableCell>{employee.city}</TableCell>
+            <TableCell>{formatCurrency(employee.salary)}</TableCell>
+            <TableCell>
+              <EmployeeStatus status={employee.status} />
+            </TableCell>
+            <TableCell className="text-right">
+              <DropdownMenu>
+                <DropdownMenuTrigger
+                  render={
+                    <Button variant="ghost" size="icon" className="size-8">
+                      <IconDots />
+                      <span className="sr-only">Open menu</span>
+                    </Button>
+                  }
+                />
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem>
                     <UpdateButton id={employee.id} />
+                  </DropdownMenuItem>
+                  <DropdownMenuItem variant="destructive">
                     <DeleteButton id={employee.id} />
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+  );
+}
+
+export function TableSkeleton() {
+  return (
+    <Table>
+      <TableHeader>
+        <TableRow>
+          {employeeKeys.map((key) => (
+            <TableHead key={key} className="capitalize">
+              {key}
+            </TableHead>
+          ))}
+          <TableHead className="text-right capitalize">actions</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        <TableRowSkeleton />
+        <TableRowSkeleton />
+        <TableRowSkeleton />
+        <TableRowSkeleton />
+        <TableRowSkeleton />
+        <TableRowSkeleton />
+      </TableBody>
+    </Table>
+  );
+}
+
+export function TableRowSkeleton() {
+  return (
+    <TableRow>
+      {employeeKeys.map((key) => (
+        <TableCell key={key}>
+          <div className="h-4 w-full bg-accent rounded-full"></div>
+        </TableCell>
+      ))}
+    </TableRow>
   );
 }

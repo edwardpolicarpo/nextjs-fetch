@@ -65,13 +65,13 @@ public class FuncionarioRepository {
         }
 
         return contains(funcionario.getId(), query)
-                || contains(funcionario.getNome(), query)
+                || contains(funcionario.getName(), query)
                 || contains(funcionario.getEmail(), query)
-                || contains(funcionario.getTelefone(), query)
-                || contains(funcionario.getCargo(), query)
-                || contains(funcionario.getDepartamento(), query)
-                || contains(funcionario.getSalario(), query)
-                || contains(funcionario.getCidade(), query)
+                || contains(funcionario.getPhone(), query)
+                || contains(funcionario.getRole(), query)
+                || contains(funcionario.getDepartment(), query)
+                || contains(funcionario.getSalary(), query)
+                || contains(funcionario.getCity(), query)
                 || contains(funcionario.getStatus(), query);
     }
 

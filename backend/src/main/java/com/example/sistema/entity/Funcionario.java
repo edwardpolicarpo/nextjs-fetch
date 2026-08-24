@@ -11,16 +11,16 @@ import lombok.*;
 public class Funcionario {
   private Long id;
   @NotBlank
-  private String nome;
+  private String name;
   @NotBlank
   @Email
   private String email;
   @Size(max = 15)
-  private String telefone;
+  private String phone;
   @NotBlank
-  private String cargo;
-  private String departamento;
-  private Double salario;
-  private String cidade;
+  private String role;
+  private String department;
+  private Double salary;
+  private String city;
   private Status status;
 }

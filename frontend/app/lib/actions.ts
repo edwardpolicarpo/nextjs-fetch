@@ -29,7 +29,7 @@ export async function createEmployee(formData: FormData) {
   const parsedData = employeeCreateSchema.parse(data);
 
   try {
-    await api.post("/employees", parsedData);
+    await api.post("/funcionarios", parsedData);
   } catch (error) {
     console.error("API Error:", error);
     throw new Error("Failed to Create Employee");
