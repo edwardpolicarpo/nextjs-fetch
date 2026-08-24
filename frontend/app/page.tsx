@@ -1,6 +1,7 @@
 import { fetchEmployeesPages } from "@/app/lib/data";
 import Search from "./ui/search";
 import { CreateEmployeeDialog } from "./ui/employees/create-dialog";
+import { ThemeToggle } from "./ui/theme-toggle";
 import { Suspense } from "react";
 import Table from "./ui/employees/table";
 import Pagination from "./ui/employees/pagination";
@@ -22,7 +23,10 @@ export default async function Page(props: {
       <h1 className="text-2xl sm:text-3xl text-left w-full font-semibold">Employees</h1>
       <aside className="my-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2 md:my-8 w-full">
         <Search placeholder="Search employees..." />
-        <CreateEmployeeDialog />
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
+          <CreateEmployeeDialog />
+        </div>
       </aside>
       <Suspense key={query + currentPage} fallback={<TableSkeleton />}>
         <div className="w-full overflow-x-auto">
