@@ -52,7 +52,11 @@ export default function EditForm({ employee }: { employee: Employee }) {
         </div>
       </section>
       <div className="mt-4 flex justify-end gap-2">
-        <Button variant="outline" render={<Link href="/">Cancel</Link>} />
+        <Button
+          variant="outline"
+          nativeButton={false}
+          render={<Link href="/">Cancel</Link>}
+        />
         <Button type="submit">Save</Button>
       </div>
     </form>
