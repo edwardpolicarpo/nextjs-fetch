@@ -1,8 +1,8 @@
 "use server";
 
 import { z } from "zod";
-import { revalidatePath } from 'next/cache';
-import { redirect } from 'next/navigation';
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { api } from "./api";
 
 const employeeSchema = z.object({
@@ -14,7 +14,7 @@ const employeeSchema = z.object({
   department: z.string(),
   city: z.string(),
   salary: z.coerce.number(),
-  status: z.enum(["em analise", "aprovado", "reprovado", "contratado"]),
+  status: z.enum(["EM_ANALISE", "APROVADO", "REPROVADO", "CONTRATADO"]),
 });
 
 const employeeCreateSchema = employeeSchema.omit({ id: true });
@@ -35,8 +35,8 @@ export async function createEmployee(formData: FormData) {
     throw new Error("Failed to Create Employee");
   }
 
-  revalidatePath('/');
-  redirect('/');
+  revalidatePath("/");
+  redirect("/");
 }
 
 export async function updatePutEmployee(id: string, formData: FormData) {
@@ -50,8 +50,8 @@ export async function updatePutEmployee(id: string, formData: FormData) {
     throw new Error("Failed to Update Employee");
   }
 
-  revalidatePath('/');
-  redirect('/');
+  revalidatePath("/");
+  redirect("/");
 }
 
 export async function updatePatchEmployee(id: string, formData: FormData) {
@@ -65,8 +65,8 @@ export async function updatePatchEmployee(id: string, formData: FormData) {
     throw new Error("Failed to Update Employee");
   }
 
-  revalidatePath('/');
-  redirect('/');
+  revalidatePath("/");
+  redirect("/");
 }
 
 export async function deleteEmployee(id: string) {
@@ -77,5 +77,5 @@ export async function deleteEmployee(id: string) {
     throw new Error("Failed to Delete Employee");
   }
 
-  revalidatePath('/');
+  revalidatePath("/");
 }

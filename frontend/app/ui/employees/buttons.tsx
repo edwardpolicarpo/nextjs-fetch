@@ -18,9 +18,9 @@ export function UpdateButton({ id }: { id: string }) {
   return (
     <Link
       href={`/${id}`}
-      className="align-center hover:bg-blue-400"
+      className="align-center flex"
     >
-      <IconPencil className="h-full" />{' '}
+      <IconPencil className="h-full mr-3" />
       Edit
     </Link>
   );
@@ -30,8 +30,8 @@ export function DeleteButton({ id }: { id: string }) {
   const deleteEmployeeWithId = deleteEmployee.bind(null, id);
   return (
     <form action={deleteEmployeeWithId}>
-      <button type="submit" className="align-center hover:bg-red-300">
-        <IconTrash className="h-full" />{' '}
+      <button type="submit" className="align-center flex">
+        <IconTrash className="h-full mr-3" />{' '}
         Delete
       </button>
     </form>

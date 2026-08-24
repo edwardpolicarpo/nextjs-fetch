@@ -90,10 +90,10 @@ export default function Form() {
               <option value="" disabled>
                 Select a status
               </option>
-              <option value="em analise">em analise</option>
-              <option value="aprovado">aprovado</option>
-              <option value="reprovado">reprovado</option>
-              <option value="contratado">contratado</option>
+              <option value="EM_ANALISE">em analise</option>
+              <option value="APROVADO">APROVADO</option>
+              <option value="REPROVADO">REPROVADO</option>
+              <option value="CONTRATADO">CONTRATADO</option>
             </select>
           </div>
         </div>

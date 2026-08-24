@@ -7,12 +7,12 @@ export type Employee = {
   department: string;
   city: string;
   salary: number;
-  status: 'em analise' | 'aprovado' | 'reprovado' | 'contratado';
-}
+  status: "EM_ANALISE" | "APROVADO" | "REPROVADO" | "CONTRATADO";
+};
 
 export type EmployeeForm = {
   id: string;
   role: string;
   salary: number;
-  status: 'em analise' | 'aprovado' | 'reprovado' | 'contratado';
-}
+  status: "EM_ANALISE" | "APROVADO" | "REPROVADO" | "CONTRATADO";
+};
