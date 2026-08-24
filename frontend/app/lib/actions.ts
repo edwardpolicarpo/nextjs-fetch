@@ -59,7 +59,11 @@ export async function updatePatchEmployee(id: string, formData: FormData) {
   const parsedData = employeeUpdateSchema.parse(data);
 
   try {
-    await api.patch(`/funcionarios/${id}`, parsedData);
+    await api.patch(`/funcionarios/${id}`, {
+      cargo: parsedData.role,
+      salario: parsedData.salary,
+      status: parsedData.status,
+    });
   } catch (error) {
     console.error("API Error:", error);
     throw new Error("Failed to Update Employee");

@@ -1,106 +1,104 @@
 import { createEmployee } from "@/app/lib/actions";
-import { Button } from "@base-ui/react";
-import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { DialogClose, DialogFooter } from "@/components/ui/dialog";
 
-export default function Form() {
+export default function CreateForm() {
   return (
     <form action={createEmployee}>
-      <section className="bg-secondary p-5 rounded-2xl">
-        {"{"}
-        <div className="ml-10 flex flex-col">
-          <div>
-            <label htmlFor="name">name: </label>
-            <input
-              id="name"
-              name="name"
-              type="text"
-              placeholder="name"
-              className="border-none py-1 px-3"
-            />
-          </div>
-          <div>
-            <label htmlFor="email">email: </label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              placeholder="email"
-              className="border-none py-1 px-3"
-            />
-          </div>
-          <div>
-            <label htmlFor="phone">phone: </label>
-            <input
-              id="phone"
-              name="phone"
-              type="text"
-              placeholder="phone"
-              className="border-none py-1 px-3"
-            />
-          </div>
-          <div>
-            <label htmlFor="role">role: </label>
-            <input
-              id="role"
-              name="role"
-              type="text"
-              placeholder="role"
-              className="border-none py-1 px-3"
-            />
-          </div>
-          <div>
-            <label htmlFor="department">department: </label>
-            <input
-              id="department"
-              name="department"
-              type="text"
-              placeholder="department"
-              className="border-none py-1 px-3"
-            />
-          </div>
-          <div>
-            <label htmlFor="city">city: </label>
-            <input
-              id="city"
-              name="city"
-              type="text"
-              placeholder="city"
-              className="border-none py-1 px-3"
-            />
-          </div>
-          <div>
-            <label htmlFor="salary">salary: </label>
-            <input
-              id="salary"
-              name="salary"
-              type="number"
-              step="0.01"
-              placeholder="salary"
-              className="peer border-none py-1 px-3"
-            />
-          </div>
-          <div>
-            <label htmlFor="status">status: </label>
-            <select
-              name="status"
-              id="status"
-              defaultValue=""
-              className="border-none py-1 px-3"
-            >
-              <option value="" disabled>
-                Select a status
-              </option>
-              <option value="EM_ANALISE">em analise</option>
-              <option value="APROVADO">APROVADO</option>
-              <option value="REPROVADO">REPROVADO</option>
-              <option value="CONTRATADO">CONTRATADO</option>
-            </select>
-          </div>
+      <div className="grid grid-cols-2 gap-4">
+        <div className="flex flex-col gap-1">
+          <label htmlFor="name">Name</label>
+          <input
+            id="name"
+            name="name"
+            type="text"
+            placeholder="name"
+            className="rounded-md border border-input bg-background px-3 py-1"
+          />
         </div>
-        {"}"}
-      </section>
-      <Link href="/">Cancel</Link>
-      <Button type="submit">Create</Button>
+        <div className="flex flex-col gap-1">
+          <label htmlFor="email">Email</label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            placeholder="email"
+            className="rounded-md border border-input bg-background px-3 py-1"
+          />
+        </div>
+        <div className="flex flex-col gap-1">
+          <label htmlFor="phone">Phone</label>
+          <input
+            id="phone"
+            name="phone"
+            type="text"
+            placeholder="phone"
+            className="rounded-md border border-input bg-background px-3 py-1"
+          />
+        </div>
+        <div className="flex flex-col gap-1">
+          <label htmlFor="role">Role</label>
+          <input
+            id="role"
+            name="role"
+            type="text"
+            placeholder="role"
+            className="rounded-md border border-input bg-background px-3 py-1"
+          />
+        </div>
+        <div className="flex flex-col gap-1">
+          <label htmlFor="department">Department</label>
+          <input
+            id="department"
+            name="department"
+            type="text"
+            placeholder="department"
+            className="rounded-md border border-input bg-background px-3 py-1"
+          />
+        </div>
+        <div className="flex flex-col gap-1">
+          <label htmlFor="city">City</label>
+          <input
+            id="city"
+            name="city"
+            type="text"
+            placeholder="city"
+            className="rounded-md border border-input bg-background px-3 py-1"
+          />
+        </div>
+        <div className="flex flex-col gap-1">
+          <label htmlFor="salary">Salary</label>
+          <input
+            id="salary"
+            name="salary"
+            type="number"
+            step="0.01"
+            placeholder="salary"
+            className="rounded-md border border-input bg-background px-3 py-1"
+          />
+        </div>
+        <div className="flex flex-col gap-1">
+          <label htmlFor="status">Status</label>
+          <select
+            name="status"
+            id="status"
+            defaultValue=""
+            className="rounded-md border border-input bg-background px-3 py-1"
+          >
+            <option value="" disabled>
+              Select a status
+            </option>
+            <option value="EM_ANALISE">Em analise</option>
+            <option value="APROVADO">Aprovado</option>
+            <option value="REPROVADO">Reprovado</option>
+            <option value="CONTRATADO">Contratado</option>
+          </select>
+        </div>
+      </div>
+      <DialogFooter className="mt-6">
+        <DialogClose render={<Button type="button" variant="outline">Cancel</Button>} />
+        <Button type="submit">Create</Button>
+      </DialogFooter>
     </form>
   );
 }
